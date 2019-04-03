@@ -6,21 +6,103 @@ import threading
 import tkinter as tk
 
 
-
-
-def scoreboard(x,y,z):
+def scoreboard2(x,y,z):
     a=x
     b=y
     c=z
 
     frame=tk.Frame(root,width=100,height=100,relief='solid',bd=1)
     frame.place(x=10,y=10)
+    l4 = tk.Label( frame, text="YOU ARE OUT" )
+    l1 = tk.Label( frame, text="YOUR GESTURE" )
+    l2 = tk.Label( frame, text="COMPUTER" )
+    l3 = tk.Label( frame, text="FINAL SCORE" )
     text1=tk.Label(frame,text=a)
     text2=tk.Label(frame,text=b)
     text3=tk.Label(frame,text=c)
+    l4.pack()
+    l2.pack()
     text1.pack()
+    l1.pack()
     text2.pack()
+    l3.pack()
     text3.pack()
+
+
+
+
+def scoreboard1(x,y,z):
+    a=x
+    b=y
+    c=z
+
+    frame=tk.Frame(root,width=100,height=100,relief='solid',bd=1)
+    frame.place(x=10,y=10)
+    l1 = tk.Label( frame, text="YOUR GESTURE" )
+    l2 = tk.Label( frame, text="COMPUTER" )
+    l3 = tk.Label( frame, text="YOUR TOTAL SCORE" )
+    text1=tk.Label(frame,text=a)
+    text2=tk.Label(frame,text=b)
+    text3=tk.Label(frame,text=c)
+    l2.pack()
+    text1.pack()
+    l1.pack()
+    text2.pack()
+    l3.pack()
+    text3.pack()
+
+
+
+def scoreboard3(x,y,z):
+    a=x
+    b=y
+    c=z
+
+    frame=tk.Frame(root,width=100,height=100,relief='solid',bd=1)
+    frame.place(x=10,y=10)
+    l1 = tk.Label( frame, text="OPPS COMPUTER WON THE GAME" )
+    l2 = tk.Label( frame, text="YOUR GESTURE" )
+    l3 = tk.Label( frame, text="COMPUTER" )
+    l4 = tk.Label( frame, text="COMPUTER FINAL SCORE" )
+    text1=tk.Label(frame,text=a)
+    text2=tk.Label(frame,text=b)
+    text3=tk.Label(frame,text=c)
+    l1.pack()
+    l2.pack()
+    text2.pack()
+    l3.pack()
+    text1.pack()
+    l4.pack()
+    text3.pack()
+
+def scoreboard4(x,y,z):
+    a=x
+    b=y
+    c=z
+    global Final_Score
+    global Score
+    ss=Score
+    m=Final_Score-Score
+    mm=m+1
+    frame=tk.Frame(root,width=100,height=100,relief='solid',bd=1)
+    frame.place(x=10,y=10)
+    l4 = tk.Label( frame, text="RUNS NEEDED TO WIN" )
+    l1 = tk.Label( frame, text="YOUR GESTURE" )
+    l2 = tk.Label( frame, text="COMPUTER" )
+    l3 = tk.Label( frame, text="COMPUTER TOTAL SCORE" )
+    text1=tk.Label(frame,text=a)
+    text2=tk.Label(frame,text=b)
+    text3=tk.Label(frame,text=c)
+    text4=tk.Label(frame,text=mm)
+
+    l2.pack()
+    text1.pack()
+    l1.pack()
+    text2.pack()
+    l3.pack()
+    text3.pack()
+    l4.pack()
+    text4.pack()
 
 
 
@@ -107,14 +189,23 @@ while True:
                 guess = cv2.imread('%d.jpg' % x)
                 cv2.imshow('Desktop',guess)
                 print('Outcomes:',x,count_defects+1)
-                # print(x)
-                # print(count_defects+1)
+
+
                 if x != count_defects+1:
                     print( 'comp_Run',count_defects+1)
-                    Score = Score+count_defects+1
+                    Score = Score+x
                     print( 'Computers_New_Score:',Score)
                     if Score > Final_Score:
                         print('Computer Wins.')
+                        root=tk.Tk()
+                        scoreboard3(x,count_defects+1,Score)
+                        root.mainloop()
+
+                    else:
+                        root=tk.Tk()
+                        scoreboard4(x,count_defects+1,Score)
+                        root.mainloop()
+
                 else:
                     print('Out!')
                     Comp_Score = Score
@@ -138,8 +229,9 @@ while True:
                 Score = Score+count_defects+1
                 print( 'New_Score:',Score)
                 root=tk.Tk()
-                scoreboard(x,count_defects+1,Score)
+                scoreboard1(x,count_defects+1,Score)
                 root.mainloop()
+
             else:
                 print('Out!')
                 Final_Score = Score
@@ -148,7 +240,7 @@ while True:
                 print('Now your bowling turn')
                 bow = 1
                 root=tk.Tk()
-                scoreboard(x,count_defects+1,Final_Score)
+                scoreboard2(x,count_defects+1,Final_Score)
                 root.mainloop()
 
 
